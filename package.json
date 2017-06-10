@@ -1,0 +1,8 @@
+{
+  "name": "movie-finder",
+  "version": "1.0.0",
+  "description": "A simple React app that let's you search movies from imdb database and display their info, as well as the link to the imdb page.",
+  "main": "index.js",
+  "author": "Ayoub Nejjari <raysoflee07@gmail.com>",
+  "license": "MIT"
+}
