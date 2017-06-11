@@ -21356,7 +21356,13 @@ const AppDispatcher = require('../dispatchers/AppDispatcher');
 const AppConstants = require('../constants/AppConstants');
 
 let Actions = {
-
+  searchMovie: function(movie) {
+    console.log("Searching for ", movie.title);
+    AppDispatcher.handleViewAction({
+      actionType:AppConstants.SEARCH_MOVIES,
+      movie:movie
+    })
+  }
 }
 
 module.exports = Actions;
@@ -21389,16 +21395,26 @@ const AppStore = require('../stores/AppStore');
 let SearchForm = React.createClass({displayName: "SearchForm",
   render: function() {
     return (
-      React.createElement("div", {className: "search-form col-md-6 col-md-offset-3"}, 
+      React.createElement("div", {className: "search-form col-md-6 col-md-offset-3 jumbotron"}, 
         React.createElement("h2", {className: "text-center"}, "Search For a Movie"), 
-        React.createElement("form", null, 
+        React.createElement("form", {onSubmit: this.onSubmit}, 
           React.createElement("div", {className: "form-group"}, 
             React.createElement("input", {type: "text", className: "form-control", ref: "title", placeholder: "Enter a movie...", required: true})
           ), 
-          React.createElement("button", {className: "btn btn-primary btn-block", type: "submit"}, "Search")
+          React.createElement("div", {className: "col-md-4 col-md-offset-4 text-center"}, 
+            React.createElement("button", {className: "btn btn-primary btn-block", type: "submit"}, "Search")
+          )
         )
       )
     )
+  },
+  onSubmit: function (e) {
+    e.preventDefault();
+    let movie = {
+      title:this.refs.title.value.trim()
+    };
+    AppActions.searchMovie(movie);
+
   }
 });
 
