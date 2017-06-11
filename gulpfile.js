@@ -12,3 +12,17 @@ gulp.task('browserify', () => {
   .pipe(source('main.js'))
   .pipe(gulp.dust('dist/js'));
 });
+
+gulp.task('copy', () => {
+    gulp.src('src/index.html')
+        .pipe(gulp.dest('dist'));
+    gulp.src('src/css/*.*')
+        .pipe(gulp.dest('dist/css'));
+    gulp.src('src/js/vendor/*.*')
+        .pipe(gulp.dest('dist/js'));
+});
+
+
+gulp.task('default', ['browserify', 'copy'], () => {
+  return gulp.watch('src/**/*.*', ['browserify', 'copy']);
+});
