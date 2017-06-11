@@ -1,5 +1,5 @@
 // most logic goes here
-const AppDispatcher = require('../dispatcher/AppDispatcher');
+const AppDispatcher = require('../dispatchers/AppDispatcher');
 const AppConstants = require('../constants/AppConstants');
 const AppAPI = require('../utils/AppAPI.js');
 

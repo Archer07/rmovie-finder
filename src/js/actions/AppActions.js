@@ -1,4 +1,4 @@
-const AppDispatcher = require('../dispatcher/AppDispatcher');
+const AppDispatcher = require('../dispatchers/AppDispatcher');
 const AppConstants = require('../constants/AppConstants');
 
 let Actions = {
