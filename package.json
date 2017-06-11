@@ -4,5 +4,17 @@
   "description": "A simple React app that let's you search movies from imdb database and display their info, as well as the link to the imdb page.",
   "main": "index.js",
   "author": "Ayoub Nejjari <raysoflee07@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "flux": "^3.1.2",
+    "gulp": "^3.9.1",
+    "object-assign": "^4.1.1",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
 }
