@@ -10,7 +10,7 @@ gulp.task('browserify', () => {
   .transform('reactify')
   .bundle()
   .pipe(source('main.js'))
-  .pipe(gulp.dust('dist/js'));
+  .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy', () => {
