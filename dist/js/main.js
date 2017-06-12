@@ -21357,7 +21357,6 @@ const AppConstants = require('../constants/AppConstants');
 
 let Actions = {
   searchMovie: function(movie) {
-    console.log("Searching for ", movie.title);
     AppDispatcher.handleViewAction({
       actionType:AppConstants.SEARCH_MOVIES,
       movie:movie
@@ -21488,7 +21487,10 @@ AppDispatcher.register(function(payload) {
   let action = payload.action;
 
   switch(action.actionType) {
-
+    case AppConstants.SEARCH_MOVIES:
+      console.log("Searching for ", action.movie.title);
+      AppStore.emit(CHANGE_EVENT);
+      break;
   }
   return true;
 
