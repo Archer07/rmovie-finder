@@ -32,6 +32,7 @@ AppDispatcher.register(function(payload) {
       console.log("Searching for ", action.movie.title);
       AppStore.emit(CHANGE_EVENT);
       break;
+
   }
   return true;
 
