@@ -21360,7 +21360,14 @@ let Actions = {
     AppDispatcher.handleViewAction({
       actionType:AppConstants.SEARCH_MOVIES,
       movie:movie
-    })
+    });
+  },
+  receiveMovieResults: function(movies) {
+    console.log(movies);
+    AppDispatcher.handleViewAction({
+      actionType:AppConstants.RECIEVE_MOVIE_RESULTS,
+      movies:movies
+    });
   }
 }
 
@@ -21373,13 +21380,30 @@ const AppStore = require('../stores/AppStore');
 const SearchForm = require('./SearchForm');
 
 
+function getAppState() {
+  return {};
+}
+
 let App = React.createClass({displayName: "App",
+  getInitialState: function() {
+    return getAppState();
+  },
+  componentDidMount: function() {
+    AppStore.addChangeListener(this._onChange);
+  },
+  componentWillMount: function() {
+    AppStore.removeChangeListener(this._onChange);
+
+  },
   render: function() {
     return (
       React.createElement("div", null, 
         React.createElement(SearchForm, null)
       )
     )
+  },
+  _onChange: function() {
+    this.setState(getAppState);
   }
 });
 
@@ -21421,7 +21445,8 @@ module.exports = SearchForm;
 
 },{"../actions/AppActions":185,"../stores/AppStore":191,"react":184}],188:[function(require,module,exports){
 module.exports = {
-  SEARCH_MOVIES: 'SEARCH_MOVIES'
+  SEARCH_MOVIES: 'SEARCH_MOVIES',
+  RECIEVE_MOVIE_RESULTS: 'RECIEVE_MOVIE_RESULTS'
 }
 
 },{}],189:[function(require,module,exports){
@@ -21489,8 +21514,10 @@ AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case AppConstants.SEARCH_MOVIES:
       console.log("Searching for ", action.movie.title);
+      AppAPI.searchMovies(action.movie)
       AppStore.emit(CHANGE_EVENT);
       break;
+
   }
   return true;
 
@@ -21504,7 +21531,17 @@ const AppActions = require('../actions/AppActions');
 
 module.exports = {
   searchMovies: function(movie) {
-
+    $.ajax({
+      url:'http://www.omdbapi.com/?s='+movie.title,
+      dataType: 'json',
+      cache:false,
+      success: function() {
+        AppActions.receiveMovieResults(data.Search);
+      }.bind(this),
+      error: function(xhr, status, error) {
+        console.log(error);
+      }.bind(this)
+    })
   }
 }
 

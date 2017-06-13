@@ -5,7 +5,7 @@ const SearchForm = require('./SearchForm');
 
 
 function getAppState() {
-  return;
+  return {};
 }
 
 let App = React.createClass({
@@ -18,7 +18,7 @@ let App = React.createClass({
   componentWillMount: function() {
     AppStore.removeChangeListener(this._onChange);
 
-  }
+  },
   render: function() {
     return (
       <div>
